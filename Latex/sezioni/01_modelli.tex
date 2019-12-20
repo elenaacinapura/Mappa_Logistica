@@ -1,0 +1,49 @@
+\section{Modelli per l'evoluzione di una popolazione}
+\subsection{Descrizione di una popolazione}
+Con il termine \textit{popolazione} si intende un insieme di individui in grado di riprodursi, e il cui numero può quindi variare nel tempo. L'interesse principale nello studio della dinamica di una popolazione è trovare dei modelli per come questo numero di individui cambi nel tempo. Dal momento che tale numero è per definizione intero, è comune descrivere il problema in forma discreta, suddividendo il tempo in istanti $t_i$ discreti e indicando con $n_i$ il numero di individui che compongono la popolazione al tempo $t_i$. Formalizzare un modello di evoluzione per la popolazione significa quindi trovare una legge che determina il numero di individui in un dato istante in funzione del numero di individui all'istante precedente, ovvero una funzione $f$ per cui
+$$n_{i+1} = f(n_i)$$
+Si può inoltre definire il tasso di crescita come il rapporto $$\dfrac{n_{i+1} - n_i}{n_i}$$
+L'espressione analitica di $f$ può dipendere in generale da tanti fattori, ma facendo delle semplificazioni e assumendo che la popolazione possa evolvere sotto determinate condizioni, è possibile costruire dei modelli di crescita relativamente semplici, che spesso non sono poi così distanti dalle dinamiche che si riscontrano in molti contesti reali.
+
+\subsection{Evoluzione lineare: il modello di Malthus}
+Un primo modello molto semplice per la crescita di una popolazione è quello di Malthus, che ipotizza che la popolazione cresca secondo una relazione lineare con un tasso di crescita $\alpha$ costante, ovvero che
+\begin{equation}
+    n_{i+1} = n_i + \alpha n_i
+    \label{eq:malthus}
+\end{equation}
+Si vede facilmente che, se $\alpha$ è positivo, la successione {$n_i$} cresce illimitatamente, e in particolare il numero di individui cresce in modo esponenziale: ipotizzando che la popolazione parta da un numero iniziale $n_0 > 0$ e raccogliendo a fattore $n_i$ nel termine generico, si ottiene 
+\begin{equation*}
+    \begin{gathered}
+    n_1 = n_0(1+\alpha) \\ n_2 = n_1(1+\alpha) = n_0(1+\alpha)^2\\\dots \\ n_i = n_0(1+\alpha)^i
+    \end{gathered}
+\end{equation*}
+
+Questa è la situazione che si verifica in una popolazione in cui i nuovi individui che nascono sono più numerosi di quelli che muoiono, e non vi è nessun ulteriore agente esterno a limitare la crescita della popolazione.
+
+\subsection{Evoluzione non lineare: il modello di Verhulst}
+Un avanzamento rispetto al semplice modello di crescita illimitato di Malthus venne proposto da Verhulst: egli ne formulò una correzione che intende tenere conto della limitatezza delle risorse ambientali a disposizione di una popolazione, e introdusse il concetto di \textit{capacità di carico}. L'idea è che la popolazione possa aumentare fino a un numero massimo di individui, $K$, raggiunto il quale le condizioni ambientali ne azzerano la crescita; inoltre, il modello deve prevedere che la velocità di crescità diventi tanto più lenta quanto più il numero di individui si avvicina alla capacità di carico. Verhulst introdusse quindi nell'equazione \ref{eq:malthus} un ulteriore termine dipendente dal rapporto $n/K$ che soddisfi queste richieste, ottenendo
+\begin{equation}
+    n_{i+1} = n_i + \alpha n_i(1-\frac{n_i}{K})
+    \label{eq:verhulst}
+\end{equation}
+Come si vedrà, questa semplice aggiunta di un termine quadratico alla funzione lineare di Malthus cambia radicalmente l'evoluzione della popolazione, e può renderne la determinazione assai complicata.
+\\
+Può essere utile riscrivere l'equazione \ref{eq:verhulst} nel seguente modo:
+\begin{equation*}
+    \begin{gathered}
+        n_{i+1} = n_i (1+\alpha+\alpha \dfrac{n_i}{K}) \\
+        n_{i+1} =  n_i (1+\alpha) (1- \dfrac{\alpha}{1+\alpha} \dfrac{n_i}{K})
+    \end{gathered}
+\end{equation*}
+Effettuando poi il cambio di variabile
+$$x_i = \dfrac{\alpha}{1+\alpha} \dfrac{n_i}{K}$$
+ si ottiene 
+$$  \cancel{\frac{K (1+\alpha)}{\alpha}} x_{i+1} = \cancel{\frac{K (1+\alpha)}{\alpha}} x_i (1+\alpha) (1- x_i) $$\\
+e definendo $r = 1+ \alpha$, si ottiene
+\begin{equation}
+    x_{i+1} = r x_i (1-x_i)
+    \label{eq:logistica}
+\end{equation}
+L'equazione \ref{eq:logistica} è detta \textit{mappa logistica}, ed è di grande importanza per le sue caratteristiche matematiche, che è intenzione approfondire in queste pagine. Il termine \textit{mappa} indica che la funzione di $x_i$ individuata ha per dominio e codominio lo stesso insieme: in questo caso in particolare, tale insieme è rappresentato dall'intervallo $\left[0,1 \right]$. Da una parte, infatti, valori negativi di $x_i$ non sono ammessi, dato che per definizione il numero di individui di una popolazione è non negativo; dall'altra parte, per valori di $x_i > 1$, il termine successivo $x_{i+1}$ risulterebbe negativo, che nuovamente non è un valore ammissibile. La variabile $x$ si mantiene dunque sempre compresa tra 0 e 1, e può essere vista quindi come una sorta di "normalizzazione" del numero di individui nella popolazione.
+
+L'equazione \ref{eq:logistica} evidenzia inoltre in maniera molto evidente la natura quadratica, e quindi non lineare, della legge di crescita della popolazione; tale non linearità fornisce caratteristiche molto particolari all'evoluzione a partire un certo valore iniziale, e lo scopo delle sezioni successive è quello di studiare le caratteristiche matematiche della mappa logistica al variare del suo parametro descrittivo $r$. Nello specifico si intende approfondire il comportamento asintotico dell'evoluzione prevista dalla mappa logistica, cercando di rispondere in particolare alla seguente domanda: esistono dei valori del numero di individui che, una volta raggiunti, si mantengono costanti nel tempo? Quando esistono, tali punti vengono chiamati \textit{punti fissi}, ed l'intenzione è di studiare quali punti fissi preveda la mappa logistica, quale sia la loro natura e come la loro presenza cambi al variare del parametro $r$. Si vedrà che, in certe circostanze, l'evoluzione asintotica della popolazione presenta un carattere caotico, e si approfondirà in che modo tale carattere si manifesti.

@@ -1,0 +1,41 @@
+\documentclass{article}
+
+\usepackage{packages}
+\usepackage[a4paper,left=3cm, right=3cm, top=2cm, bottom=2cm]{geometry} 
+
+\title{\textbf{\LARGE Mappa logistica e caos}\\ {\Large Evoluzione non lineare delle popolazioni}}
+\author{Elena Acinapura}
+\date{Università degli Studi di Trento \\ \\ Dicembre 2019}
+
+
+\theoremstyle{teorema}
+\newtheorem{teorema}{Teorema}[section]
+\theoremstyle{definizione}
+\newtheorem{definizione}{Definizione}[section]
+
+\makeindex
+
+\begin{document}
+\maketitle
+\begin{minipage}{\linewidth}
+    \makebox[\linewidth]{
+        \includegraphics[scale = 0.6]{Immagini/copertina.png}
+    }
+\end{minipage}
+
+\newpage
+\tableofcontents
+\newpage
+
+\input{sezioni/01_modelli.tex}
+
+\input{sezioni/02_punti_fissi.tex}
+
+\input{sezioni/03_studio_logistica.tex}
+\vspace{30pt}
+\input{sezioni/04_conclusioni.tex}
+\vspace{30pt}
+\section*{Note finali}
+I grafici e le simulazioni presentati in questo documento sono stati realizzati realizzati in Python e i sorgenti sono disponibili, assieme al sorgente \LaTeX di questo stesso documento, presso LINK.
+
+\end{document}
